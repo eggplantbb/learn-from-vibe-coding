@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>learn from vibe-coding</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <h1>干中学 学中记</h1>
+        <p class="hero-subtitle">每一次vibe coding用到的技术都不白用。</p>
+      </header>
+
+      <main id="main-layout" class="layout">
+        <section class="map-panel" aria-labelledby="skill-tree-heading">
+
+          <div class="map-stage">
+            <div id="bubble-map" class="bubble-map" aria-live="polite"></div>
+          </div>
+        </section>
+
+        <div id="detail-backdrop" class="detail-backdrop" hidden></div>
+        <aside id="detail-panel" class="detail-panel" aria-labelledby="detail-heading" hidden>
+          <div class="section-heading">
+            <h2 id="detail-heading">技术点详情</h2>
+            <button id="detail-close" class="detail-close" type="button" aria-label="关闭详情面板">×</button>
+          </div>
+          <div id="detail-empty" class="detail-empty">
+            <p>点击一个技术点，查看它在具体项目中的落地方式。</p>
+          </div>
+          <div id="detail-content" class="detail-content" hidden></div>
+        </aside>
+      </main>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>

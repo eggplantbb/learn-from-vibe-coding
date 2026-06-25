@@ -1,0 +1,109 @@
+{
+  "projects": [
+    {
+      "id": "interactive-writing-demo",
+      "name": "互动写字页 Demo",
+      "linkOrPath": "examples/interactive-writing-demo.json",
+      "reviewedAt": "2026-06-22"
+    }
+  ],
+  "techPoints": [
+    {
+      "id": "canvas",
+      "name": "Canvas",
+      "island": "动画表现岛",
+      "kind": "实现术语",
+      "kindDetail": "它是更接近绘制层的术语，适合自己控制像素、轨迹和逐帧结果。",
+      "summary": "Canvas 用于 2D 绘制、轨迹记录和需要逐帧控制的动态渲染。",
+      "detail": "当项目需要自己画图、擦除、水痕、粒子或复杂实时视觉反馈时，Canvas 往往比普通 DOM/CSS 更直接。",
+      "commonForms": "写字轨迹、小游戏画布、图像编辑区、粒子层和实时可视化。",
+      "stackMappings": "Web 是 Canvas API；原生环境里近似角色会由 Core Graphics、自定义绘制或 CALayer 承担。",
+      "boundaries": "Canvas 不等于任何会动的效果。只有当项目真的进入绘制层、需要自己控制图像输出时，它才适合被单独点亮。",
+      "usageSignals": "如果项目里明确在画布上绘制内容、做逐帧更新、记录轨迹或控制像素级视觉结果，这个点就应被记录为已使用。"
+    },
+    {
+      "id": "layering",
+      "name": "图层叠加",
+      "island": "动画表现岛",
+      "kind": "能力概念",
+      "kindDetail": "它强调的是视觉层关系，而不是某个单独 API 名字。",
+      "summary": "图层叠加用于管理背景、内容、遮罩、特效和前景之间的视觉覆盖关系。",
+      "detail": "很多动态页面的质感来自多层内容同时存在。图层叠加决定了这些层怎么配合、怎么互不干扰。",
+      "commonForms": "背景层加内容层加特效层、遮罩层、粒子层和浮动 HUD。",
+      "stackMappings": "Web 常通过定位与 z-index 组织；原生环境里会通过 CALayer、overlay view 或 view hierarchy 处理。",
+      "boundaries": "图层叠加不是任何 absolute 定位都算。只有当项目里明确处理了多层视觉结构和覆盖关系时，这个点才有意义。",
+      "usageSignals": "如果项目里存在多个视觉层同时作用，并且为它们设计了稳定的前后关系、透明度和交互穿透规则，就应点亮它。"
+    },
+    {
+      "id": "pointer-events",
+      "name": "键盘 / 鼠标 / 触摸事件",
+      "island": "交互状态岛",
+      "kind": "能力概念",
+      "kindDetail": "它强调不同输入设备带来的交互差异，而不只是单一事件监听。",
+      "summary": "键盘、鼠标和触摸事件用于让界面正确响应不同输入方式，而不是只适配一种设备。",
+      "detail": "很多项目在桌面上能用，到了手机或触控板环境就立刻出问题，原因往往是输入设备差异没被认真处理。",
+      "commonForms": "鼠标点击、触摸滑动、键盘快捷键、长按、指针移动和组合输入。",
+      "stackMappings": "Web 常见 pointer、mouse、touch、keyboard 事件；原生环境会对应手势识别器、键盘事件和鼠标追踪。",
+      "boundaries": "不是页面里出现鼠标就算。只有当项目真的考虑过多输入方式的兼容、分歧和处理路径，这个点才应单独点亮。",
+      "usageSignals": "如果项目里同时处理了桌面与移动输入差异，或者明确用到键盘、鼠标和触摸中的多种交互入口，这个点就该被记录。"
+    },
+    {
+      "id": "asset-management",
+      "name": "静态资源管理",
+      "island": "工程部署岛",
+      "kind": "能力概念",
+      "kindDetail": "它是资源组织和引用能力，不是单独文件夹名字。",
+      "summary": "静态资源管理用于组织图片、音频、图标、字体和其他非代码资源。",
+      "detail": "很多项目的混乱并不来自代码，而来自资源文件散落、命名混乱、引用路径不稳。",
+      "commonForms": "图片目录管理、音频文件分层、公共资源路径、打包引用和命名规范。",
+      "stackMappings": "Web 会落到 public、assets、import 路径体系；原生项目会有 bundle 资源、asset catalog 或资源目录。",
+      "boundaries": "不是项目里出现几张图片就算资源管理。只有当你明确组织过资源结构、引用方式和命名规范，它才更适合被点亮。",
+      "usageSignals": "如果项目里明确管理过背景图、音频、图标、字体或素材路径，并为它们建立了稳定引用关系，这个点就应被记录。"
+    },
+    {
+      "id": "step-prompts",
+      "name": "分步提示",
+      "island": "AI 协作岛",
+      "kind": "协作方法",
+      "kindDetail": "它是把 AI 输出收敛到小范围问题里的方法层能力。",
+      "summary": "分步提示用于限制 AI 一次只解决一个清楚的小问题，而不是整包吞下整个项目。",
+      "detail": "很多 AI 输出变差，不是模型不行，而是问题被问得太大。分步提示的核心是把任务切成更窄、更可验证的步子。",
+      "commonForms": "先搭结构、再做样式、再接数据、再修 bug 这种阶段式提示。",
+      "stackMappings": "它和平台无关，只和协作方式有关。",
+      "boundaries": "分步提示不等于每轮都发一句新消息。重点是每轮的目标是否足够清晰、可验证、可收敛。",
+      "usageSignals": "如果项目里通过多轮小步提示分别推进结构、逻辑、样式、修复或验证，这个点就应被记录。"
+    }
+  ],
+  "projectTechApplications": [
+    {
+      "id": "interactive-writing-demo-canvas",
+      "projectId": "interactive-writing-demo",
+      "techPointId": "canvas",
+      "roleInProject": "用于承载用户写字轨迹、擦除感和字迹渐隐效果。",
+      "aiCollaboration": "让 AI 分开处理绘制、状态与动画循环，避免一次写成一团。",
+      "pitfallsAndFixes": "最初把事件、绘制和淡出混在一起，后续拆成输入层、绘制层和时间控制层。",
+      "reusable": true,
+      "notes": "可复用到雪地写字、沙滩写字等互动场景。"
+    },
+    {
+      "id": "interactive-writing-demo-layering",
+      "projectId": "interactive-writing-demo",
+      "techPointId": "layering",
+      "roleInProject": "用于组织背景、雾气、水痕和书写层的视觉关系。",
+      "aiCollaboration": "要求 AI 先列出视觉层级，再逐层输出样式和定位规则。",
+      "pitfallsAndFixes": "一开始层级顺序混乱，导致书写层被遮挡，后续固定 z-index 结构。",
+      "reusable": true,
+      "notes": "适合沉淀为多图层互动页面的基础做法。"
+    },
+    {
+      "id": "interactive-writing-demo-pointer-events",
+      "projectId": "interactive-writing-demo",
+      "techPointId": "pointer-events",
+      "roleInProject": "用于同时处理桌面端鼠标输入和移动端触摸输入。",
+      "aiCollaboration": "明确告诉 AI 需要同时覆盖鼠标和触摸行为，而不是只写一种事件。",
+      "pitfallsAndFixes": "如果只写鼠标事件，移动端会失效，后续补成统一输入处理。",
+      "reusable": true,
+      "notes": "可直接复用到其他互动 H5。"
+    }
+  ]
+}

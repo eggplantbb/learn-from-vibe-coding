@@ -1,0 +1,148 @@
+{
+  "projects": [
+    {
+      "id": "grid-game-demo",
+      "name": "网格小游戏 Demo",
+      "linkOrPath": "examples/grid-game-demo.json",
+      "reviewedAt": "2026-06-22"
+    }
+  ],
+  "techPoints": [
+    {
+      "id": "html",
+      "name": "HTML",
+      "island": "页面结构岛",
+      "kind": "实现术语",
+      "kindDetail": "它不是页面能力本身，而是 Web 世界里描述界面结构的基础术语和载体。",
+      "summary": "HTML 是网页最基础的结构描述语言，用来定义标题、段落、按钮、表单、列表和导航这些页面骨架。",
+      "detail": "它先回答页面由什么组成，再交给样式和交互去决定页面看起来怎样、动起来怎样。",
+      "commonForms": "静态 HTML 页面、服务端模板输出的页面骨架，以及 React 或 Vue 最终渲染出来的 DOM 结构。",
+      "stackMappings": "在纯网页里它直接就是 HTML；在 React 里通常表现为 JSX 最终生成的 DOM 结构；在 macOS 原生里会对应到视图层级。",
+      "boundaries": "HTML 主要管结构，不负责视觉样式，也不等于 React。",
+      "usageSignals": "如果项目里明确组织过页面骨架、语义标签、表单容器、内容层级或基础 DOM 结构，就说明这个点被实际用了。"
+    },
+    {
+      "id": "css",
+      "name": "CSS",
+      "island": "页面结构岛",
+      "kind": "实现术语",
+      "kindDetail": "它是 Web 里控制视觉样式和排版规则的基础术语与实现层。",
+      "summary": "CSS 用来控制页面样式、排版、间距、颜色、层级和视觉关系。",
+      "detail": "它是在 HTML 结构之上建立视觉系统的主要方式。",
+      "commonForms": "原生 CSS、CSS Modules、Tailwind 这类原子类方案，以及组件内样式系统。",
+      "stackMappings": "React 里可能通过 CSS 文件、CSS-in-JS 或 Tailwind 使用；原生环境则会对应 view 修饰器或控件样式。",
+      "boundaries": "CSS 负责样式和版式，不等于布局能力本身。",
+      "usageSignals": "如果项目里明确处理过样式层级、间距体系、卡片或按钮状态、排版或视觉对齐，它就不只是默认浏览器样式。"
+    },
+    {
+      "id": "click-event",
+      "name": "点击事件",
+      "island": "交互状态岛",
+      "kind": "能力概念",
+      "kindDetail": "它是最常见的动作触发方式，属于交互触发层。",
+      "summary": "点击事件用于响应用户的明确操作，并触发界面变化、流程推进或局部反馈。",
+      "detail": "这里关注的不是会不会写事件监听，而是点击之后界面和状态如何正确变化。",
+      "commonForms": "按钮点击、卡片点击、工具栏动作、菜单操作和游戏格子触发。",
+      "stackMappings": "Web 会表现为 click 或 pointer 事件；原生环境则会对应 button action 或 gesture recognizer。",
+      "boundaries": "点击事件不是任何交互都算。拖拽、输入、键盘快捷键和滚动反馈属于别的交互通道。",
+      "usageSignals": "如果项目里存在点击后推进流程、切换状态、打开界面或触发规则逻辑的明确设计，这个点就应该被点亮。"
+    },
+    {
+      "id": "state-toggle",
+      "name": "状态切换",
+      "island": "交互状态岛",
+      "kind": "能力概念",
+      "kindDetail": "它描述的是界面状态如何被控制，而不是具体按钮或样式名称。",
+      "summary": "状态切换用于管理界面在不同阶段之间的变化，比如未开始、进行中、成功、失败、展开和关闭。",
+      "detail": "重点是这些状态有没有被清楚定义，切换条件是否稳定，以及切换后页面是否一致。",
+      "commonForms": "tab 切换、展开收起、编辑态与预览态切换、进行中与结果态切换。",
+      "stackMappings": "Web 或 React 常通过布尔值、枚举值或状态机驱动；原生环境也会通过 view state 或 selection state 体现。",
+      "boundaries": "状态切换不等于任何视觉变化。只有当页面有明确的多状态定义和切换逻辑时，它才值得单独记录。",
+      "usageSignals": "如果项目里明确管理过界面从一个阶段到另一个阶段的切换条件和展示结果，这个点就应该被点亮。"
+    },
+    {
+      "id": "mock-data",
+      "name": "Mock 数据",
+      "island": "数据处理岛",
+      "kind": "能力概念",
+      "kindDetail": "它不是临时凑数据，而是前期验证页面和逻辑的一种方法。",
+      "summary": "Mock 数据用于在真实数据缺席时，先推进页面结构、交互流程和规则逻辑的验证。",
+      "detail": "Mock 数据的价值在于先用一组可控样例把页面和规则跑通，等真实数据接进来时，项目不会从零重做。",
+      "commonForms": "本地 JSON、固定数组、伪造接口返回和预置样例状态。",
+      "stackMappings": "Web、React 和原生项目都会用到，只是数据入口位置不同。",
+      "boundaries": "只有当它真的承担了验证结构、调试流程或复现场景的作用时，才值得单独记录。",
+      "usageSignals": "如果项目里先用样例数据验证过列表、棋盘、结果页或交互流程，而不是等真实数据准备好再开发，这个点就应被点亮。"
+    },
+    {
+      "id": "list-rendering",
+      "name": "列表渲染",
+      "island": "数据处理岛",
+      "kind": "能力概念",
+      "kindDetail": "它是数据到界面的映射能力，而不是单纯页面里出现多个元素。",
+      "summary": "列表渲染用于把一组结构化数据批量映射成重复但有规则的界面内容。",
+      "detail": "它的关键是数据 shape 是否稳定、每项如何被映射、更新时如何保持一致。",
+      "commonForms": "卡片列表、表格行、棋盘格子、菜单项和时间轴条目。",
+      "stackMappings": "React 常见 map 渲染；Web 原生可能模板循环或字符串组装；原生环境则会对应 table、collection 或 list view。",
+      "boundaries": "页面里有多个相似模块不一定算列表渲染。只有当这些模块来自一个统一数据集合，它才应该被单独点亮。",
+      "usageSignals": "如果项目里明确根据数组、矩阵或数据源批量生成界面项，并处理了更新或索引关系，这个点就应该被记录。"
+    },
+    {
+      "id": "git",
+      "name": "Git",
+      "island": "工程部署岛",
+      "kind": "工程工具",
+      "kindDetail": "它属于版本管理层，而不是页面或数据能力层。",
+      "summary": "Git 用于记录版本变更、回退实验过程和阶段性提交。",
+      "detail": "Git 的作用不只是有个仓库，而是让你能够有意识地管理变化、回退错误实验、保留关键阶段。",
+      "commonForms": "分段提交、实验分支、回退版本和按功能块记录修改。",
+      "stackMappings": "它和技术栈关系不大，Web、原生、脚本项目都可能依赖它。",
+      "boundaries": "如果仓库只是存在但开发过程没有依赖提交、回退或分段管理，也不一定要把 Git 当成主要技术点。",
+      "usageSignals": "如果项目里明确通过提交、回退、对比或分支管理过开发过程，这个点就应被点亮。"
+    },
+    {
+      "id": "bug-fixing",
+      "name": "Bug 修复",
+      "island": "AI 协作岛",
+      "kind": "协作方法",
+      "kindDetail": "它强调围绕具体问题让 AI 定位和修复，而不是泛泛重写。",
+      "summary": "Bug 修复用于让 AI 围绕明确复现路径、异常结果或报错信息做针对性诊断和修正。",
+      "detail": "最有效的不是让它重写一遍，而是给它复现步骤、异常行为和期望结果差异。",
+      "commonForms": "提供报错日志、给复现步骤、指出异常截图和限定修复范围。",
+      "stackMappings": "和技术栈无关，是调试协作方法。",
+      "boundaries": "只要 AI 改过代码不一定算 bug 修复。只有当它是在围绕具体问题做定位和纠偏时，这个点才成立。",
+      "usageSignals": "如果项目里明确让 AI 根据复现路径、报错或异常行为来分析并修正问题，这个点就应被点亮。"
+    }
+  ],
+  "projectTechApplications": [
+    {
+      "id": "minesweeper-html",
+      "projectId": "grid-game-demo",
+      "techPointId": "html",
+      "roleInProject": "用于搭建棋盘、工具栏和结果区的基础结构。",
+      "aiCollaboration": "先让 AI 只输出页面结构，不提前混入规则逻辑。",
+      "pitfallsAndFixes": "早期结构和逻辑一起写，后续把棋盘和状态区拆开。",
+      "reusable": true,
+      "notes": "适合规则类小游戏的基础骨架。"
+    },
+    {
+      "id": "minesweeper-click-event",
+      "projectId": "grid-game-demo",
+      "techPointId": "click-event",
+      "roleInProject": "用于翻格、插旗和重开等核心操作触发。",
+      "aiCollaboration": "让 AI 分清左键翻开和辅助操作的不同处理路径。",
+      "pitfallsAndFixes": "早期事件处理过于分散，后续统一由棋盘层分发。",
+      "reusable": true,
+      "notes": "可复用到其他网格交互游戏。"
+    },
+    {
+      "id": "minesweeper-mock-data",
+      "projectId": "grid-game-demo",
+      "techPointId": "mock-data",
+      "roleInProject": "用于在规则稳定前快速验证棋盘数据结构和渲染。",
+      "aiCollaboration": "让 AI 先给出一组固定雷区数据，便于对照调试。",
+      "pitfallsAndFixes": "如果直接随机生成，调试回放困难，后续先固定样例数据。",
+      "reusable": true,
+      "notes": "适合需要先调界面再补真实逻辑的项目。"
+    }
+  ]
+}
