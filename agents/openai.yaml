@@ -1,0 +1,8 @@
+interface:
+  display_name: "Learn from Vibe-Coding"
+  short_description: "把项目实践沉淀成可增长的技术地图"
+  brand_color: "#D9B235"
+  default_prompt: "Use $learn-from-vibe-coding to extract the real technologies used in this project and update the skill-map data."
+
+policy:
+  allow_implicit_invocation: true
