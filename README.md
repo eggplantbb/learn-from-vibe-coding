@@ -112,7 +112,6 @@ http://127.0.0.1:4173/dashboard/
   "projectId": "sample-project",
   "techPointId": "canvas",
   "roleInProject": "在项目里的作用",
-  "aiCollaboration": "和 AI 协作时怎么处理",
   "pitfallsAndFixes": "踩坑与修正",
   "reusable": true,
   "notes": "补充说明"

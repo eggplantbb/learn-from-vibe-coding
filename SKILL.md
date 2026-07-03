@@ -138,7 +138,6 @@ Fields:
 - `projectId`
 - `techPointId`
 - `roleInProject`
-- `aiCollaboration`
 - `pitfallsAndFixes`
 - `reusable`
 - `notes`

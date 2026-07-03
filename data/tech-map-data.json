@@ -691,7 +691,6 @@
       "projectId": "codexpeek",
       "techPointId": "appkit",
       "roleInProject": "用 AppKit 组织菜单栏状态项、概览面板、点击事件监听和应用生命周期，承载整个 macOS 原生界面。",
-      "aiCollaboration": "当前提供的材料主要是源码和 README，未体现稳定的 AI 协作方法，暂不单独沉淀。",
       "pitfallsAndFixes": "菜单栏项目不是普通窗口应用，需要额外处理状态栏按钮、无边框面板、全局点击关闭和定时刷新等原生交互细节。",
       "reusable": true,
       "notes": "关键实现集中在 Sources/CodexPeek/AppDelegate.swift 和 main.swift。"
@@ -701,7 +700,6 @@
       "projectId": "codexpeek",
       "techPointId": "json",
       "roleInProject": "用 JSON 承接 Codex app-server 的 JSON-RPC 请求和响应数据，是额度信息读取的基础数据格式。",
-      "aiCollaboration": "当前提供的材料主要是源码和 README，未体现稳定的 AI 协作方法，暂不单独沉淀。",
       "pitfallsAndFixes": "原始返回结构可能同时出现不同命名风格和不同 payload 形态，因此需要先稳定解析再进入显示层。",
       "reusable": true,
       "notes": "关键实现集中在 Sources/CodexPeekCore/CodexRPCClient.swift。"
@@ -711,7 +709,6 @@
       "projectId": "codexpeek",
       "techPointId": "api-data",
       "roleInProject": "通过本地 Codex app-server 读取账户额度和账户信息，让菜单栏界面展示动态使用数据。",
-      "aiCollaboration": "当前提供的材料主要是源码和 README，未体现稳定的 AI 协作方法，暂不单独沉淀。",
       "pitfallsAndFixes": "这里不是普通远程 REST 请求，而是本地进程上的 RPC 调用，因此要处理启动失败、超时、异常响应和断开重连。",
       "reusable": true,
       "notes": "README 明确说明会调用 account/rateLimits/read 和 account/read。"
@@ -721,7 +718,6 @@
       "projectId": "codexpeek",
       "techPointId": "data-transform",
       "roleInProject": "把 RPC 返回的原始额度与账户信息整理成 RateWindow、Credits、AccountIdentity 和展示所需的快照结构。",
-      "aiCollaboration": "当前提供的材料主要是源码和 README，未体现稳定的 AI 协作方法，暂不单独沉淀。",
       "pitfallsAndFixes": "不同字段名、窗口时长格式和错误消息回退逻辑都需要收束，否则界面层会直接承受底层数据差异。",
       "reusable": true,
       "notes": "相关模型和映射逻辑位于 CodexPeekCore。"
@@ -731,7 +727,6 @@
       "projectId": "codexpeek",
       "techPointId": "swift-package-manager",
       "roleInProject": "通过 Package.swift 组织可执行目标、核心库目标和测试目标，作为这个 Swift 项目的主要工程入口。",
-      "aiCollaboration": "当前提供的材料主要是源码和 README，未体现稳定的 AI 协作方法，暂不单独沉淀。",
       "pitfallsAndFixes": "原生项目除了直接运行 SwiftPM 外，还补了手工构建脚本，用来规避开发环境里 SDK 查找和打包链路的不稳定性。",
       "reusable": true,
       "notes": "Package.swift 同时定义了 CodexPeek 和 CodexPeekCore。"
@@ -741,7 +736,6 @@
       "projectId": "codexpeek",
       "techPointId": "asset-management",
       "roleInProject": "管理菜单栏图标、应用图标和文档演示素材，保证打包后的 app 和文档展示都能稳定引用资源。",
-      "aiCollaboration": "当前提供的材料主要是源码和 README，未体现稳定的 AI 协作方法，暂不单独沉淀。",
       "pitfallsAndFixes": "原生应用的资源不仅要在仓库中分类，还要在打包时复制进 app bundle，资源路径和打包流程需要保持一致。",
       "reusable": true,
       "notes": "Assets/、docs/assets/ 和 Scripts/package-app.sh 都体现了资源组织与复制。"
@@ -751,7 +745,6 @@
       "projectId": "codexpeek",
       "techPointId": "bundling",
       "roleInProject": "通过 build 和 package 脚本把二进制、图标和 Info.plist 收束成可直接打开的 macOS app 产物。",
-      "aiCollaboration": "当前提供的材料主要是源码和 README，未体现稳定的 AI 协作方法，暂不单独沉淀。",
       "pitfallsAndFixes": "桌面应用交付不只是编译通过，还要考虑架构目标、SDK 路径、bundle 目录结构和版本信息写入。",
       "reusable": true,
       "notes": "Scripts/build.sh、Scripts/package-app.sh 和 package-release.sh 共同承载交付链路。"
@@ -761,7 +754,6 @@
       "projectId": "xiaocezi",
       "techPointId": "react",
       "roleInProject": "用 React 组织整个拼贴式作品集页面，把 tab 栏、拼贴画布、作品详情页和微信弹窗拆成独立组件，通过状态驱动界面切换。",
-      "aiCollaboration": "当前提供的材料主要是源码和 README，未体现稳定的 AI 协作方法，暂不单独沉淀。",
       "pitfallsAndFixes": "这个项目不是普通长页面，而是画布式展示，详情态和列表态共存时要避免组件职责混乱，因此需要把主状态集中在 App 层收束。",
       "reusable": true,
       "notes": "关键文件包括 src/App.tsx、src/components/CollageCanvas.tsx、src/components/ImmersiveProjectView.tsx。"
@@ -771,7 +763,6 @@
       "projectId": "xiaocezi",
       "techPointId": "css",
       "roleInProject": "用 CSS 完成拼贴画布、栏目标签、纸张质感、阴影、旋转和沉浸页样式，是整个视觉风格落地的主实现层。",
-      "aiCollaboration": "当前提供的材料主要是源码和 README，未体现稳定的 AI 协作方法，暂不单独沉淀。",
       "pitfallsAndFixes": "这种拼贴视觉不是常规表单布局，元素层级、阴影、背景纹理和绝对定位容易互相打架，需要持续收束样式优先级和视觉关系。",
       "reusable": true,
       "notes": "主要样式集中在 src/styles.css。"
@@ -781,7 +772,6 @@
       "projectId": "xiaocezi",
       "techPointId": "component-structure",
       "roleInProject": "把项目拆成 TabBar、CollageItem、CollageCanvas、ImmersiveProjectView、WechatModal 等组件，降低拼贴展示和详情展示之间的耦合。",
-      "aiCollaboration": "当前提供的材料主要是源码和 README，未体现稳定的 AI 协作方法，暂不单独沉淀。",
       "pitfallsAndFixes": "如果把画布渲染、交互触发和详情展示全堆在一个文件里，后续增删作品和调交互会很快失控，因此需要先拆清组件边界。",
       "reusable": true,
       "notes": "组件目录位于 src/components/。"
@@ -791,7 +781,6 @@
       "projectId": "xiaocezi",
       "techPointId": "state-toggle",
       "roleInProject": "用状态切换控制当前栏目、当前作品、详情页开合动画和微信弹窗开关，让同一套页面可以在多种展示状态间切换。",
-      "aiCollaboration": "当前提供的材料主要是源码和 README，未体现稳定的 AI 协作方法，暂不单独沉淀。",
       "pitfallsAndFixes": "详情页关闭时不仅是隐藏，还要配合退场动画和过渡原点重置，否则会出现状态不同步或闪跳。",
       "reusable": true,
       "notes": "关键状态位于 src/App.tsx 中的 activeTabId、activeProjectId、detailClosing 和 wechatOpen。"
@@ -801,7 +790,6 @@
       "projectId": "xiaocezi",
       "techPointId": "modal",
       "roleInProject": "用弹窗承载微信二维码展示，避免离开当前拼贴页面就能完成补充信息查看。",
-      "aiCollaboration": "当前提供的材料主要是源码和 README，未体现稳定的 AI 协作方法，暂不单独沉淀。",
       "pitfallsAndFixes": "弹窗虽然不复杂，但仍要处理遮罩点击关闭和弹层内点击不冒泡，否则会出现误关闭。",
       "reusable": true,
       "notes": "实现位于 src/components/WechatModal.tsx。"
@@ -811,7 +799,6 @@
       "projectId": "xiaocezi",
       "techPointId": "css-animation",
       "roleInProject": "用 CSS 动画完成贴纸下落、工牌摆动、hover 呼吸感和详情页转场，让作品集更接近真实拼贴物的动态质感。",
-      "aiCollaboration": "当前提供的材料主要是源码和 README，未体现稳定的 AI 协作方法，暂不单独沉淀。",
       "pitfallsAndFixes": "这里的动画不是单纯装饰，还和状态切换联动，因此要控制好时长、transform 叠加和关闭时机，避免视觉与状态脱节。",
       "reusable": true,
       "notes": "关键动画定义在 src/styles.css，详情页开合由 App.tsx 与样式配合。"
@@ -821,7 +808,6 @@
       "projectId": "xiaocezi",
       "techPointId": "schema",
       "roleInProject": "用统一的数据结构定义 tab、拼贴元素和作品详情，让内容主要通过配置文件驱动，而不是把每个作品硬编码进组件里。",
-      "aiCollaboration": "当前提供的材料主要是源码和 README，未体现稳定的 AI 协作方法，暂不单独沉淀。",
       "pitfallsAndFixes": "这个项目同时支持图片长图、完整 HTML 页和预留视频三种详情形态，如果数据结构不先定清楚，详情渲染分支会越来越乱。",
       "reusable": true,
       "notes": "相关结构定义位于 src/types.ts，内容配置位于 src/content/tabs/ 和 src/content/projects/。"
@@ -831,7 +817,6 @@
       "projectId": "xiaocezi",
       "techPointId": "typescript",
       "roleInProject": "用 TypeScript 给拼贴元素、tab 配置和作品详情类型加约束，确保图片型、HTML 型和视频型详情在代码里按分支被正确处理。",
-      "aiCollaboration": "当前提供的材料主要是源码和 README，未体现稳定的 AI 协作方法，暂不单独沉淀。",
       "pitfallsAndFixes": "如果没有类型约束，配置驱动项目很容易出现字段名写错、详情类型和渲染逻辑不匹配的问题，排查会拖到运行时才暴露。",
       "reusable": true,
       "notes": "联合类型和配置类型主要定义在 src/types.ts。"
@@ -841,7 +826,6 @@
       "projectId": "xiaocezi",
       "techPointId": "html",
       "roleInProject": "除了 React 渲染的主站结构外，这个项目还支持把完整的单页 HTML 作品作为详情页嵌入展示，适合承接已完成的独立项目页面。",
-      "aiCollaboration": "当前提供的材料主要是源码和 README，未体现稳定的 AI 协作方法，暂不单独沉淀。",
       "pitfallsAndFixes": "当作品来源不统一时，主站和单独作品页需要共存，因此要预留 HTML 详情模式，而不是强行把所有内容都改写进同一套组件里。",
       "reusable": true,
       "notes": "README 和 src/components/ImmersiveProjectView.tsx 明确支持 HTML 类型详情，资源位于 public/project-html/。"
@@ -851,7 +835,6 @@
       "projectId": "xiaocezi",
       "techPointId": "vite",
       "roleInProject": "用 Vite 驱动本地开发和静态构建，让 React 组件、样式和公共资源可以稳定联调并输出 dist 产物。",
-      "aiCollaboration": "当前提供的材料主要是源码和 README，未体现稳定的 AI 协作方法，暂不单独沉淀。",
       "pitfallsAndFixes": "这类作品集项目虽然没有后端，但仍需要稳定的开发服务和构建输出链路，否则资源引用和最终部署目录容易不一致。",
       "reusable": true,
       "notes": "入口包括 package.json 脚本和 vite.config.ts。"
@@ -861,7 +844,6 @@
       "projectId": "xiaocezi",
       "techPointId": "asset-management",
       "roleInProject": "管理贴纸素材、项目长图、完整 HTML 页面、字体和鼠标样式资源，支撑这个项目强依赖视觉素材的展示方式。",
-      "aiCollaboration": "当前提供的材料主要是源码和 README，未体现稳定的 AI 协作方法，暂不单独沉淀。",
       "pitfallsAndFixes": "这类项目的复杂度很大一部分不在业务逻辑，而在资源分层和命名上；如果素材路径混乱，后续替换和打包会很痛苦。",
       "reusable": true,
       "notes": "资源主要分布在 public/assets/、public/project-images/、public/project-html/、public/fonts/ 和 public/cursors/。"

@@ -80,7 +80,6 @@
       "projectId": "interactive-writing-demo",
       "techPointId": "canvas",
       "roleInProject": "用于承载用户写字轨迹、擦除感和字迹渐隐效果。",
-      "aiCollaboration": "让 AI 分开处理绘制、状态与动画循环，避免一次写成一团。",
       "pitfallsAndFixes": "最初把事件、绘制和淡出混在一起，后续拆成输入层、绘制层和时间控制层。",
       "reusable": true,
       "notes": "可复用到雪地写字、沙滩写字等互动场景。"
@@ -90,7 +89,6 @@
       "projectId": "interactive-writing-demo",
       "techPointId": "layering",
       "roleInProject": "用于组织背景、雾气、水痕和书写层的视觉关系。",
-      "aiCollaboration": "要求 AI 先列出视觉层级，再逐层输出样式和定位规则。",
       "pitfallsAndFixes": "一开始层级顺序混乱，导致书写层被遮挡，后续固定 z-index 结构。",
       "reusable": true,
       "notes": "适合沉淀为多图层互动页面的基础做法。"
@@ -100,7 +98,6 @@
       "projectId": "interactive-writing-demo",
       "techPointId": "pointer-events",
       "roleInProject": "用于同时处理桌面端鼠标输入和移动端触摸输入。",
-      "aiCollaboration": "明确告诉 AI 需要同时覆盖鼠标和触摸行为，而不是只写一种事件。",
       "pitfallsAndFixes": "如果只写鼠标事件，移动端会失效，后续补成统一输入处理。",
       "reusable": true,
       "notes": "可直接复用到其他互动 H5。"

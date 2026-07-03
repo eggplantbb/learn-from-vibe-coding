@@ -687,10 +687,6 @@ function renderApplicationDetails(application) {
         <dd>${application.roleInProject}</dd>
       </div>
       <div>
-        <dt>AI 协作情况</dt>
-        <dd>${application.aiCollaboration || "未填写"}</dd>
-      </div>
-      <div>
         <dt>弯路与修正</dt>
         <dd>${application.pitfallsAndFixes || "未填写"}</dd>
       </div>
