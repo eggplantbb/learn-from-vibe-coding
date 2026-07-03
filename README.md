@@ -48,6 +48,24 @@ python3 -m http.server 4173
 http://127.0.0.1:4173/dashboard/
 ```
 
+## 部署到 Vercel
+
+这个仓库可以直接按静态站点部署到 Vercel。
+
+建议设置：
+
+- Root Directory：`learn-from-vibe-coding`
+- Framework Preset：`Other`
+- Build Command：留空
+- Output Directory：留空
+
+仓库里已经包含：
+
+- `vercel.json`
+- 根路径自动跳转到 `dashboard/` 的 `index.html`
+
+部署完成后，直接打开分配给你的域名即可，不需要再手动补 `/dashboard/`。
+
 ## 数据结构
 
 主数据文件是 `data/tech-map-data.json`。

@@ -1,5 +1,12 @@
 {
-  "projects": [],
+  "projects": [
+    {
+      "id": "codexpeek",
+      "name": "CodexPeek",
+      "linkOrPath": "/Users/chawmin/Documents/vibe coding project/codex额度/CodexPeek",
+      "reviewedAt": "2026-07-02"
+    }
+  ],
   "techPoints": [
     {
       "id": "html",
@@ -662,5 +669,76 @@
       "boundaries": "不是开多个聊天窗口就算 Multi-Agent。关键在于不同代理有明确任务边界，并最终形成协作链路。"
     }
   ],
-  "projectTechApplications": []
+  "projectTechApplications": [
+    {
+      "id": "codexpeek-appkit",
+      "projectId": "codexpeek",
+      "techPointId": "appkit",
+      "roleInProject": "用 AppKit 组织菜单栏状态项、概览面板、点击事件监听和应用生命周期，承载整个 macOS 原生界面。",
+      "aiCollaboration": "当前提供的材料主要是源码和 README，未体现稳定的 AI 协作方法，暂不单独沉淀。",
+      "pitfallsAndFixes": "菜单栏项目不是普通窗口应用，需要额外处理状态栏按钮、无边框面板、全局点击关闭和定时刷新等原生交互细节。",
+      "reusable": true,
+      "notes": "关键实现集中在 Sources/CodexPeek/AppDelegate.swift 和 main.swift。"
+    },
+    {
+      "id": "codexpeek-json",
+      "projectId": "codexpeek",
+      "techPointId": "json",
+      "roleInProject": "用 JSON 承接 Codex app-server 的 JSON-RPC 请求和响应数据，是额度信息读取的基础数据格式。",
+      "aiCollaboration": "当前提供的材料主要是源码和 README，未体现稳定的 AI 协作方法，暂不单独沉淀。",
+      "pitfallsAndFixes": "原始返回结构可能同时出现不同命名风格和不同 payload 形态，因此需要先稳定解析再进入显示层。",
+      "reusable": true,
+      "notes": "关键实现集中在 Sources/CodexPeekCore/CodexRPCClient.swift。"
+    },
+    {
+      "id": "codexpeek-api-data",
+      "projectId": "codexpeek",
+      "techPointId": "api-data",
+      "roleInProject": "通过本地 Codex app-server 读取账户额度和账户信息，让菜单栏界面展示动态使用数据。",
+      "aiCollaboration": "当前提供的材料主要是源码和 README，未体现稳定的 AI 协作方法，暂不单独沉淀。",
+      "pitfallsAndFixes": "这里不是普通远程 REST 请求，而是本地进程上的 RPC 调用，因此要处理启动失败、超时、异常响应和断开重连。",
+      "reusable": true,
+      "notes": "README 明确说明会调用 account/rateLimits/read 和 account/read。"
+    },
+    {
+      "id": "codexpeek-data-transform",
+      "projectId": "codexpeek",
+      "techPointId": "data-transform",
+      "roleInProject": "把 RPC 返回的原始额度与账户信息整理成 RateWindow、Credits、AccountIdentity 和展示所需的快照结构。",
+      "aiCollaboration": "当前提供的材料主要是源码和 README，未体现稳定的 AI 协作方法，暂不单独沉淀。",
+      "pitfallsAndFixes": "不同字段名、窗口时长格式和错误消息回退逻辑都需要收束，否则界面层会直接承受底层数据差异。",
+      "reusable": true,
+      "notes": "相关模型和映射逻辑位于 CodexPeekCore。"
+    },
+    {
+      "id": "codexpeek-swift-package-manager",
+      "projectId": "codexpeek",
+      "techPointId": "swift-package-manager",
+      "roleInProject": "通过 Package.swift 组织可执行目标、核心库目标和测试目标，作为这个 Swift 项目的主要工程入口。",
+      "aiCollaboration": "当前提供的材料主要是源码和 README，未体现稳定的 AI 协作方法，暂不单独沉淀。",
+      "pitfallsAndFixes": "原生项目除了直接运行 SwiftPM 外，还补了手工构建脚本，用来规避开发环境里 SDK 查找和打包链路的不稳定性。",
+      "reusable": true,
+      "notes": "Package.swift 同时定义了 CodexPeek 和 CodexPeekCore。"
+    },
+    {
+      "id": "codexpeek-asset-management",
+      "projectId": "codexpeek",
+      "techPointId": "asset-management",
+      "roleInProject": "管理菜单栏图标、应用图标和文档演示素材，保证打包后的 app 和文档展示都能稳定引用资源。",
+      "aiCollaboration": "当前提供的材料主要是源码和 README，未体现稳定的 AI 协作方法，暂不单独沉淀。",
+      "pitfallsAndFixes": "原生应用的资源不仅要在仓库中分类，还要在打包时复制进 app bundle，资源路径和打包流程需要保持一致。",
+      "reusable": true,
+      "notes": "Assets/、docs/assets/ 和 Scripts/package-app.sh 都体现了资源组织与复制。"
+    },
+    {
+      "id": "codexpeek-bundling",
+      "projectId": "codexpeek",
+      "techPointId": "bundling",
+      "roleInProject": "通过 build 和 package 脚本把二进制、图标和 Info.plist 收束成可直接打开的 macOS app 产物。",
+      "aiCollaboration": "当前提供的材料主要是源码和 README，未体现稳定的 AI 协作方法，暂不单独沉淀。",
+      "pitfallsAndFixes": "桌面应用交付不只是编译通过，还要考虑架构目标、SDK 路径、bundle 目录结构和版本信息写入。",
+      "reusable": true,
+      "notes": "Scripts/build.sh、Scripts/package-app.sh 和 package-release.sh 共同承载交付链路。"
+    }
+  ]
 }
