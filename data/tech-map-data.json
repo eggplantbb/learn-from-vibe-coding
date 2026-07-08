@@ -11,6 +11,12 @@
       "name": "小册子",
       "linkOrPath": "/Users/chawmin/Documents/vibe coding project/小册子",
       "reviewedAt": "2026-07-03"
+    },
+    {
+      "id": "019f3f84-6b1a-7aa3-89ad-0276c2ce2385",
+      "name": "App Store",
+      "linkOrPath": "/Users/chawmin/Documents/vibe coding project/小红书搬运",
+      "reviewedAt": "2026-07-08"
     }
   ],
   "techPoints": [
@@ -465,6 +471,26 @@
       "boundaries": "TypeScript 不等于 React，也不等于 Schema。Schema 更偏“这类数据应该长什么样”，TypeScript 是把这种结构约束真正落进代码的一种常见方式。"
     },
     {
+      "id": "graphql",
+      "name": "GraphQL",
+      "island": "数据处理岛",
+      "summary": "GraphQL 用一条结构化查询去精确声明自己要哪些字段，适合在一个接口里取回帖子、评论、用户和分页信息。",
+      "detail": "和固定返回结构的普通 REST 接口不同，GraphQL 更像是前端主动写一张取数清单：帖子要什么字段、评论节点要什么字段、分页信息要不要一起拿，都可以在同一次请求里说清楚。它的价值在于减少多次往返请求，也让前端更容易对接复杂层级数据。",
+      "commonForms": "单次查询同时拿主对象和关联对象、评论树查询、带 cursor 的分页查询、搜索结果与详情合并查询。",
+      "stackMappings": "Web 里常见于 fetch + POST 请求发送 query 和 variables；服务端会暴露一个统一 GraphQL endpoint；原生项目也会通过 GraphQL client 以同样方式取数。",
+      "boundaries": "GraphQL 不是所有 API 数据都算。只有当项目真的在写 query、variables，并依赖 GraphQL 返回的层级结构时，它才值得被单独点亮。"
+    },
+    {
+      "id": "browser-console-api-reuse",
+      "name": "浏览器 Console 接口复用抓取",
+      "island": "数据处理岛",
+      "summary": "浏览器 Console 接口复用抓取指的是不直接扒页面 DOM，而是在已打开页面里复用网站前端自己正在调用的评论接口，把结构化数据直接取出来。",
+      "detail": "这类方式的核心不是“看见评论文字后复制页面”，而是先在浏览器开发者工具里找到评论请求，再在 Console 里用 fetch 复现同样的接口调用。因为代码运行在当前页面上下文里，它往往能顺带复用当前站点的 cookie、登录态和同源请求环境。只要评论本来就是前端异步拉下来的 JSON 或 GraphQL 数据，这种方式通常会比扒 HTML 更稳定，也更容易做分页。",
+      "commonForms": "在 Network 里找到 comments 接口后用 fetch 复现、在 Console 里带上 cursor 连续翻页、复用 GraphQL query 抓评论、把返回 JSON 里的 comments 或 edges 节点整理成可分析结构。",
+      "stackMappings": "Web 端最常见，通常发生在浏览器 DevTools 的 Console 和 Network 配合场景；脚本化版本则会把同样的请求搬到 Python、Node 或 CLI 里执行；原生 App 通常无法直接靠浏览器 Console 复用，而要借助代理抓包或官方接口。",
+      "boundaries": "它适合那些评论通过前端接口异步加载、且你已经拿到页面上下文的网站；不适合纯服务端拼 HTML、强签名校验、App 私有接口或强风控场景。它本质上是“复用接口”，不是“万能爬虫”。"
+    },
+    {
       "id": "npm",
       "name": "npm",
       "island": "工程部署岛",
@@ -847,6 +873,42 @@
       "pitfallsAndFixes": "这类项目的复杂度很大一部分不在业务逻辑，而在资源分层和命名上；如果素材路径混乱，后续替换和打包会很痛苦。",
       "reusable": true,
       "notes": "资源主要分布在 public/assets/、public/project-images/、public/project-html/、public/fonts/ 和 public/cursors/。"
+    },
+    {
+      "id": "019f3f84-6b1a-7aa3-89ad-0276c2ce2385-api-data",
+      "projectId": "019f3f84-6b1a-7aa3-89ad-0276c2ce2385",
+      "techPointId": "api-data",
+      "roleInProject": "这个项目里的评论抓取主线是直接走平台接口，而不是先扒页面 HTML。Reddit 通过公开 JSON API 取帖子和评论，Product Hunt 通过官方接口取帖子评论，RequestHunt 则把多平台反馈抓取交给聚合服务。",
+      "pitfallsAndFixes": "真正的难点不是把请求发出去，而是先判断目标站点有没有稳定接口、评论是不是异步加载、分页怎么翻，以及当前接口是否需要登录态或 token。",
+      "reusable": true,
+      "notes": "相关证据见 opc-skills/skills/reddit/scripts/get_post.py、opc-skills/skills/producthunt/scripts/get_post_comments.py 和 opc-skills/skills/requesthunt/SKILL.md。"
+    },
+    {
+      "id": "019f3f84-6b1a-7aa3-89ad-0276c2ce2385-graphql",
+      "projectId": "019f3f84-6b1a-7aa3-89ad-0276c2ce2385",
+      "techPointId": "graphql",
+      "roleInProject": "项目里的 Product Hunt 评论抓取直接写 GraphQL 查询，一次请求同时拿帖子标识、评论总数、评论节点和分页 cursor，是评论抓取里很典型的结构化接口使用方式。",
+      "pitfallsAndFixes": "GraphQL 的关键不是 endpoint 本身，而是 query 结构要写对；如果 comments、pageInfo、user 这些层级没提前想清楚，就会出现字段不全、分页断掉或评论作者信息丢失的问题。",
+      "reusable": true,
+      "notes": "实现集中在 opc-skills/skills/producthunt/scripts/get_post_comments.py 和 producthunt_api.py。"
+    },
+    {
+      "id": "019f3f84-6b1a-7aa3-89ad-0276c2ce2385-data-transform",
+      "projectId": "019f3f84-6b1a-7aa3-89ad-0276c2ce2385",
+      "techPointId": "data-transform",
+      "roleInProject": "不同平台的评论返回结构并不一致，项目会把 Reddit 和 Product Hunt 的原始评论对象清洗成更稳定的 author、body、score 或 votes 这类字段，便于后续阅读和分析。",
+      "pitfallsAndFixes": "如果不先做字段收束，后续分析会一直被原始平台结构牵着走；尤其是不同平台对作者、正文、投票数和分页字段的命名差异很大。",
+      "reusable": true,
+      "notes": "清洗逻辑见 opc-skills/skills/reddit/scripts/reddit_api.py 的 clean_comment，以及 opc-skills/skills/producthunt/scripts/producthunt_api.py 的 clean_comment。"
+    },
+    {
+      "id": "019f3f84-6b1a-7aa3-89ad-0276c2ce2385-browser-console-api-reuse",
+      "projectId": "019f3f84-6b1a-7aa3-89ad-0276c2ce2385",
+      "techPointId": "browser-console-api-reuse",
+      "roleInProject": "虽然项目代码里主要把评论抓取落成了脚本和 CLI，但它沉淀出的核心思路其实是同一条：先找站点前端自己在用的评论接口，再复用那条接口直接拿结构化数据。把这条思路搬到浏览器 Console 里，就是你感兴趣的评论抓取方式。",
+      "pitfallsAndFixes": "这招只对“评论通过前端接口异步加载”的网站稳定有效；如果站点有强签名、短时 token、App 私有接口或重风控，Console 也未必能直接复现。真正要先判断的是接口形态和站点边界，而不是急着写抓取代码。",
+      "reusable": true,
+      "notes": "从这个项目的已实现证据看，最适合把它理解成“接口优先抓取”的浏览器端等价方法：Network 里定位评论请求，Console 里复现 fetch，顺着 comments / edges / pageInfo 分页取数据。"
     }
   ]
 }
