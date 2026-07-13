@@ -17,6 +17,12 @@
       "name": "App Store",
       "linkOrPath": "/Users/chawmin/Documents/vibe coding project/小红书搬运",
       "reviewedAt": "2026-07-08"
+    },
+    {
+      "id": "reading-notes",
+      "name": "读书笔记",
+      "linkOrPath": "/Users/chawmin/Documents/vibe coding project/读书笔记",
+      "reviewedAt": "2026-07-13"
     }
   ],
   "techPoints": [
@@ -471,6 +477,26 @@
       "boundaries": "TypeScript 不等于 React，也不等于 Schema。Schema 更偏“这类数据应该长什么样”，TypeScript 是把这种结构约束真正落进代码的一种常见方式。"
     },
     {
+      "id": "core-data",
+      "name": "Core Data",
+      "island": "数据处理岛",
+      "summary": "Core Data 是 Apple 平台常见的本地持久化方案，用来把结构化数据稳定存到设备上，并支持查询、替换和关联管理。",
+      "detail": "当一个 iPhone 或 iPad 应用不只是临时展示内容，而是要把书架、笔记、连接状态等数据长期保存在本地时，就会进入 Core Data 这类持久化层。它的价值不只是存下来，而是让本地数据有模型、有查询方式，也能在多次同步和刷新之间保持一致。",
+      "commonForms": "本地书架、离线缓存、用户内容存档、同步结果落盘和本地关系数据管理。",
+      "stackMappings": "在 Apple 原生项目里常见于 NSPersistentContainer、NSManagedObject 和后台 context；Web 里近似角色会由 IndexedDB、本地数据库或本地存储方案承担。",
+      "boundaries": "Core Data 不等于任何本地变量缓存。只有当项目真的把数据作为持久化模型保存，并依赖查询或替换逻辑时，它才值得被单独点亮。"
+    },
+    {
+      "id": "keychain",
+      "name": "Keychain",
+      "island": "工程部署岛",
+      "summary": "Keychain 用于在 Apple 设备上安全保存凭证、密钥和其他敏感信息，而不是把它们直接写进普通数据库或配置文件。",
+      "detail": "当一个应用需要保存 API Key、登录凭证或访问令牌时，最关键的问题不是怎么读取，而是怎么安全落地。Keychain 的价值就在于把这类敏感信息和普通业务数据分开存，降低误写入本地数据库、日志或同步存储的风险。",
+      "commonForms": "API Key 保存、登录凭证保存、访问令牌存储、敏感配置托管。",
+      "stackMappings": "Apple 原生项目里会通过 Keychain Services 或封装层读写；Web 没有完全等价的安全存储，一般需要依赖浏览器机制或服务端会话；桌面和移动原生平台通常也有各自的安全凭证库。",
+      "boundaries": "Keychain 不是所有本地存储都算。只有当项目明确把敏感凭证和普通业务数据分开管理，并依赖系统安全存储时，它才成立。"
+    },
+    {
       "id": "graphql",
       "name": "GraphQL",
       "island": "数据处理岛",
@@ -909,6 +935,78 @@
       "pitfallsAndFixes": "这招只对“评论通过前端接口异步加载”的网站稳定有效；如果站点有强签名、短时 token、App 私有接口或重风控，Console 也未必能直接复现。真正要先判断的是接口形态和站点边界，而不是急着写抓取代码。",
       "reusable": true,
       "notes": "从这个项目的已实现证据看，最适合把它理解成“接口优先抓取”的浏览器端等价方法：Network 里定位评论请求，Console 里复现 fetch，顺着 comments / edges / pageInfo 分页取数据。"
+    },
+    {
+      "id": "reading-notes-swiftui",
+      "projectId": "reading-notes",
+      "techPointId": "swiftui",
+      "roleInProject": "整个 iPhone App 以 SwiftUI 为主界面体系，使用 TabView、NavigationStack 和环境对象组织“重逢 / 书架 / 我的”三大入口，让同步、浏览和个人页都落在统一的原生界面结构里。",
+      "pitfallsAndFixes": "这个项目不是单页原型，而是完整 App 结构；如果界面状态和导航入口没有从一开始组织清楚，后续再接同步、详情和设置页时会很快变乱。",
+      "reusable": true,
+      "notes": "关键入口位于 ReadingNotes/App/ReadingNotesApp.swift、UI/RootTabView.swift、UI/Library/LibraryView.swift 和 UI/Reunion/ReunionView.swift。"
+    },
+    {
+      "id": "reading-notes-component-structure",
+      "projectId": "reading-notes",
+      "techPointId": "component-structure",
+      "roleInProject": "项目把书架、随机重逢、个人页、连接弹层、详情页等拆成独立视图和服务层，避免把 UI、同步逻辑和分析逻辑混在一个文件里。",
+      "pitfallsAndFixes": "如果把微信读书连接、随机卡片、书架列表和 AI 分析全部堆在同一层，后续不管是补数据源还是改页面都会很痛苦，因此先拆出 AppStore、Services、UI 子目录很关键。",
+      "reusable": true,
+      "notes": "目录结构已经按 App、Domain、Persistence、Services、UI 分层。"
+    },
+    {
+      "id": "reading-notes-state",
+      "projectId": "reading-notes",
+      "techPointId": "state",
+      "roleInProject": "项目用一个中心 AppStore 承接书籍、笔记、连接状态、同步状态和 AI 分析状态，再通过环境对象下发给各个页面，保证页面展示和同步结果保持一致。",
+      "pitfallsAndFixes": "这种项目不是纯静态展示，连接状态、同步中、同步成功、分析中、分析失败都会影响 UI；如果状态分散在各个页面里，用户流程很容易不一致。",
+      "reusable": true,
+      "notes": "核心状态位于 ReadingNotes/App/AppStore.swift。"
+    },
+    {
+      "id": "reading-notes-api-data",
+      "projectId": "reading-notes",
+      "techPointId": "api-data",
+      "roleInProject": "项目通过微信读书网关接口拉取书架、划线和个人想法，并通过 DeepSeek 接口生成阅读人格分析，外部 API 是这个应用两条关键能力链路的来源。",
+      "pitfallsAndFixes": "同步和分析都依赖外部接口，因此除了请求本身，还要处理凭证失效、限流、超时、数据格式变化和不同接口的分页方式。",
+      "reusable": true,
+      "notes": "接口封装位于 ReadingNotes/Services/WereadAPI.swift 和 ReadingNotes/Services/DeepSeekAnalysisService.swift。"
+    },
+    {
+      "id": "reading-notes-data-transform",
+      "projectId": "reading-notes",
+      "techPointId": "data-transform",
+      "roleInProject": "项目不会直接把微信读书原始返回结构喂给页面，而是先把书、划线、想法整理成统一的 ReadingBook 和 ReadingNote 模型，再落成本地快照。",
+      "pitfallsAndFixes": "微信读书的书架、书签、想法来自不同接口，字段和分页方式也不同；如果不先收束成统一快照模型，书架浏览、随机回顾和 AI 分析都要直接理解底层接口结构。",
+      "reusable": true,
+      "notes": "转换逻辑集中在 ReadingNotes/Services/WereadSyncService.swift。"
+    },
+    {
+      "id": "reading-notes-core-data",
+      "projectId": "reading-notes",
+      "techPointId": "core-data",
+      "roleInProject": "项目用 Core Data 保存本地书架、笔记、来源映射和连接状态，让同步结果可以离线保留，并支持重新打开 App 后直接恢复。",
+      "pitfallsAndFixes": "同步类项目如果只有内存状态，App 一退出数据就没了；这里额外处理了后台 context、批量替换和连接记录，避免多次同步后本地数据层失控。",
+      "reusable": true,
+      "notes": "持久化实现位于 ReadingNotes/Persistence/PersistenceController.swift。"
+    },
+    {
+      "id": "reading-notes-keychain",
+      "projectId": "reading-notes",
+      "techPointId": "keychain",
+      "roleInProject": "微信读书 API Key 不写进普通数据库，而是单独存到系统 Keychain，让同步凭证和书架笔记数据分开管理。",
+      "pitfallsAndFixes": "这类应用最容易犯的错，是把凭证顺手塞进本地数据库或配置里；项目这里明确把 Keychain 作为唯一凭证入口，减少了凭证误落盘的风险。",
+      "reusable": true,
+      "notes": "相关实现和引用见 ReadingNotes/Services/KeychainStore.swift 与 App/AppStore.swift。"
+    },
+    {
+      "id": "reading-notes-prompt",
+      "projectId": "reading-notes",
+      "techPointId": "prompt",
+      "roleInProject": "AI 阅读人格功能不是把原始笔记直接丢给模型，而是先组织系统提示词、固定 JSON 输出结构和输入样本摘要，尽量把分析结果收束成稳定的五段式内容。",
+      "pitfallsAndFixes": "这类 AI 功能如果不约束输出格式，前端很容易拿到不可解析的自然语言结果；项目这里通过系统提示和严格 JSON 结构，把模型输出限制在可落地的数据形态里。",
+      "reusable": true,
+      "notes": "提示词和 JSON 解码逻辑位于 ReadingNotes/Services/DeepSeekAnalysisService.swift。"
     }
   ]
 }
