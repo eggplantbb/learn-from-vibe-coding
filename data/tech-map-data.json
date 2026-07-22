@@ -3,26 +3,32 @@
     {
       "id": "codexpeek",
       "name": "CodexPeek",
-      "linkOrPath": "/Users/chawmin/Documents/vibe coding project/codex额度/CodexPeek",
+      "linkOrPath": "codex额度/CodexPeek",
       "reviewedAt": "2026-07-02"
     },
     {
       "id": "xiaocezi",
       "name": "小册子",
-      "linkOrPath": "/Users/chawmin/Documents/vibe coding project/小册子",
+      "linkOrPath": "小册子",
       "reviewedAt": "2026-07-03"
     },
     {
       "id": "019f3f84-6b1a-7aa3-89ad-0276c2ce2385",
       "name": "App Store",
-      "linkOrPath": "/Users/chawmin/Documents/vibe coding project/小红书搬运",
+      "linkOrPath": "App Store",
       "reviewedAt": "2026-07-08"
     },
     {
       "id": "reading-notes",
       "name": "读书笔记",
-      "linkOrPath": "/Users/chawmin/Documents/vibe coding project/读书笔记",
+      "linkOrPath": "读书笔记",
       "reviewedAt": "2026-07-13"
+    },
+    {
+      "id": "xiaoweishangjiayinhang",
+      "name": "小微商家银行",
+      "linkOrPath": "小微商家银行",
+      "reviewedAt": "2026-07-22"
     }
   ],
   "techPoints": [
@@ -1007,6 +1013,105 @@
       "pitfallsAndFixes": "这类 AI 功能如果不约束输出格式，前端很容易拿到不可解析的自然语言结果；项目这里通过系统提示和严格 JSON 结构，把模型输出限制在可落地的数据形态里。",
       "reusable": true,
       "notes": "提示词和 JSON 解码逻辑位于 ReadingNotes/Services/DeepSeekAnalysisService.swift。"
+    },
+    {
+      "id": "xiaoweishangjiayinhang-html",
+      "projectId": "xiaoweishangjiayinhang",
+      "techPointId": "html",
+      "roleInProject": "项目主体是一个移动端银行场景的高保真静态原型，主要交付物是单文件 HTML 页面，用多页 slide 结构承载功能说明、场景演示和作品集叙事。",
+      "pitfallsAndFixes": "这种原型的难点不是起框架，而是如何在单文件里同时承载页面结构、内容顺序和交互入口；如果结构从一开始没有分层，后续很容易越改越乱。",
+      "reusable": true,
+      "notes": "核心实现位于 小微商家银行/prototype/index.html 与 作品集.html。"
+    },
+    {
+      "id": "xiaoweishangjiayinhang-css",
+      "projectId": "xiaoweishangjiayinhang",
+      "techPointId": "css",
+      "roleInProject": "项目用原生 CSS 完成移动端金融原型的视觉系统，包括设计 token、手机壳容器、卡片层级、颜色体系、标签、底部弹层和多种业务卡片样式。",
+      "pitfallsAndFixes": "这种原型页没有组件库兜底，样式一致性全靠自己维持；一旦 token、间距和卡片结构不先定住，页面很容易出现局部漂移和视觉失衡。",
+      "reusable": true,
+      "notes": "prototype/index.html 顶部样式区定义了完整的 token 和主要业务模块样式。"
+    },
+    {
+      "id": "xiaoweishangjiayinhang-layout",
+      "projectId": "xiaoweishangjiayinhang",
+      "techPointId": "layout",
+      "roleInProject": "项目的核心表达不是普通长页面，而是围绕“核心地图层 / 今日动作层 / 深度洞察层”的三层渐进布局，把复杂经营资金信息分层组织给小微商家看。",
+      "pitfallsAndFixes": "金融场景信息很多，如果不先把层级关系拆清楚，页面会变成指标堆砌；这个项目通过层级分区和手机视口约束，把信息密度控制在可浏览范围内。",
+      "reusable": true,
+      "notes": "结构说明在 智能资金地图_原型功能清单.md 中写得很明确，原型页也按这个分层落地。"
+    },
+    {
+      "id": "xiaoweishangjiayinhang-click-event",
+      "projectId": "xiaoweishangjiayinhang",
+      "techPointId": "click-event",
+      "roleInProject": "项目通过点击事件驱动角色切换、地图视图切换、底部弹层打开关闭、旧版页面对比节点切换和操作按钮反馈，让静态原型具备接近真实产品的演示链路。",
+      "pitfallsAndFixes": "原型如果只有视觉没有点击链路，很多设计判断就无法验证；这里的关键是把每个交互入口和对应的页面反馈接起来，而不是只做可点击样子。",
+      "reusable": true,
+      "notes": "交互脚本集中在 prototype/index.html 底部的原生 JS 区域。"
+    },
+    {
+      "id": "xiaoweishangjiayinhang-state-toggle",
+      "projectId": "xiaoweishangjiayinhang",
+      "techPointId": "state-toggle",
+      "roleInProject": "项目通过状态切换控制商家角色、资金地图视图、引导页显示、对比高亮、执行进度和弹层开合，让同一个原型可以展示多种业务状态。",
+      "pitfallsAndFixes": "这种多场景原型如果没有明确状态切换，内容只会变成一张静态海报；这里通过角色内容表和切换函数，让一个页面能演示不同经营处境。",
+      "reusable": true,
+      "notes": "关键逻辑包括 applyMerchantRole、switchMapView、openSheet/closeSheet、startExecutionProcess。"
+    },
+    {
+      "id": "xiaoweishangjiayinhang-css-animation",
+      "projectId": "xiaoweishangjiayinhang",
+      "techPointId": "css-animation",
+      "roleInProject": "项目使用轻量 CSS 动画增强原型表达，比如周摘要打字光标闪烁、视图切换过渡以及点击反馈，强化“智能助手正在工作”的感觉。",
+      "pitfallsAndFixes": "这里的动画不能太重，否则会把原本应该突出的信息结构盖掉；因此更适合用轻量过渡和提示性动画，而不是复杂长动画。",
+      "reusable": true,
+      "notes": "prototype/index.html 中定义了 week-summary-cursor、summaryCursorBlink 等动效。"
+    },
+    {
+      "id": "xiaoweishangjiayinhang-asset-management",
+      "projectId": "xiaoweishangjiayinhang",
+      "techPointId": "asset-management",
+      "roleInProject": "项目依赖大量本地静态资源来建立金融产品原型的真实感，包括背景、标签、银行卡面、角色图、旧版截图和自定义数字字体。",
+      "pitfallsAndFixes": "高保真原型很容易被素材路径和命名拖垮；这里资源目录和引用关系如果不先理顺，页面很快就会出现图片缺失和视觉断裂。",
+      "reusable": true,
+      "notes": "项目根目录和 prototype/ 下管理了背景图、tab 图、legacy-shots、intro-shots 以及 AlibabaSans 字体。"
+    },
+    {
+      "id": "xiaoweishangjiayinhang-requirement-breakdown",
+      "projectId": "xiaoweishangjiayinhang",
+      "techPointId": "requirement-breakdown",
+      "roleInProject": "这个项目不仅有原型页面，还有功能清单、PRD 和项目 brief，把复杂的银行场景拆成页面层级、模块职责、交互规则和检查范围，明显体现了先拆需求再落页面的工作方式。",
+      "pitfallsAndFixes": "金融产品原型如果不先把业务口径和页面目标拆开，后续很容易把设计、技术和产品判断混在一起；这里通过多份说明文件把边界先固定住。",
+      "reusable": true,
+      "notes": "关键文档包括 小微智能化资金地图_PRD_v2.md、智能资金地图_原型功能清单.md 和 loop尝试/project-brief.md。"
+    },
+    {
+      "id": "xiaoweishangjiayinhang-context-files",
+      "projectId": "xiaoweishangjiayinhang",
+      "techPointId": "context-files",
+      "roleInProject": "项目把 loop-manifest、project-brief、standards、review-report、fix-log 这类文件作为持续上下文，让后续每轮检查和修复都围绕同一套边界展开，而不是每次从零解释页面目标。",
+      "pitfallsAndFixes": "多轮原型修改最怕边界漂移；如果没有上下文文件，每轮都容易顺手重做页面。这里通过固定输入文件，把“检查什么、怎么修、修到哪一步停”提前写清楚了。",
+      "reusable": true,
+      "notes": "相关文件集中在 小微商家银行/loop尝试/。"
+    },
+    {
+      "id": "xiaoweishangjiayinhang-bug-fixing",
+      "projectId": "xiaoweishangjiayinhang",
+      "techPointId": "bug-fixing",
+      "roleInProject": "项目明确跑过一轮检查-修复-复查流程，针对页面缺失页码、图片引用缺失这类具体问题输出 review-report 和 fix-log，而不是直接重写原型。",
+      "pitfallsAndFixes": "这种作品集/原型页最容易出现的问题不是架构错误，而是资源缺失、结构不一致和局部交互断裂；这里的修复方式偏局部纠偏，而不是整页推翻。",
+      "reusable": true,
+      "notes": "证据见 loop尝试/review-report.md 与 fix-log.md。"
+    },
+    {
+      "id": "xiaoweishangjiayinhang-iteration",
+      "projectId": "xiaoweishangjiayinhang",
+      "techPointId": "iteration",
+      "roleInProject": "项目目录里保留了 loop 尝试、修复日志、作品集 HTML 副本和原型副本，说明这不是一次生成就结束，而是经过多轮检查、修正和复查逐步收敛出来的原型。",
+      "pitfallsAndFixes": "复杂原型通常不可能一轮到位，真正重要的是每轮是否有明确检查目标和停手边界；这个项目已经把这种节奏固化成可复用流程。",
+      "reusable": true,
+      "notes": "可见证据包括 loop尝试/ 目录、prototype/index_副本.html 和多份 loop 文档。"
     }
   ]
 }
